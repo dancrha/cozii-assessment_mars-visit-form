@@ -1,6 +1,19 @@
-# Celestial Escapes - Mars Visit Application Form
+<div align="center">
 
-![Celestial Escapes Logo](/assets/logo2.png)
+# Celestial Escapes - Mars Visit Application Form
+  
+</div>
+
+
+
+<div align="center">
+
+  ![Celestial Escapes Logo](https://github.com/danielcrha/mars-application/assets/44410856/eecea576-4a82-4599-826a-67cca5a8bb42)
+  
+</div>
+
+
+
 
 ## Cozii Technologies Assessment
 
@@ -21,6 +34,13 @@ This web application provides the user with a modern landing page, informing the
 ## About the Developer
 
 This project was crafted by **Daniel Crha**
+
+## Screenshots
+
+![Screenshot 2023-12-03 180033](https://github.com/danielcrha/mars-application/assets/44410856/da4c4cf6-a70f-4e8c-9239-997b8d9f148e)
+![Screenshot 2023-12-03 180048](https://github.com/danielcrha/mars-application/assets/44410856/4b217373-2720-4c8f-bdb2-9f535d9ec0a1)
+![Screenshot 2023-12-03 180107](https://github.com/danielcrha/mars-application/assets/44410856/875e8230-b91e-4be7-ab92-0b363f64081f)
+
 
 ## Getting Started with Create React App
 
