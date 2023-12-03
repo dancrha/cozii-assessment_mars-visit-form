@@ -1,5 +1,6 @@
-import { FormLabel, TextField } from "@mui/material";
+import { TextField } from "@mui/material";
 
+// Define the structure of user data
 type UserData = {
   firstName: string;
   lastName: string;
@@ -9,10 +10,12 @@ type UserData = {
   phone: number;
 };
 
+// Extend UserData with a function to update partial data
 type UserFormProps = UserData & {
   updateFields: (fields: Partial<UserData>) => void;
 };
 
+// UserForm component to capture user information
 export function UserForm({
   firstName,
   lastName,
@@ -24,9 +27,12 @@ export function UserForm({
 }: UserFormProps) {
   return (
     <div className='flex flex-col p-8 items-center'>
+      {/* Section header */}
       <h1 className='flex justify-center mb-4 text-black text-2xl font-semibold'>
         Personal Information
       </h1>
+
+      {/* Application form introduction */}
       <div className='flex text-center justify-center text-gray-600'>
         <p>
           Welcome to the Mars Expedition Application Form! Your health and
@@ -35,6 +41,7 @@ export function UserForm({
         </p>
       </div>
 
+      {/* First Name Input */}
       <TextField
         id='standard-basic'
         label='First Name'
@@ -43,6 +50,8 @@ export function UserForm({
         onChange={(e) => updateFields({ firstName: e.target.value })}
         sx={{ mb: 2, mt: 4 }}
       />
+
+      {/* Last Name Input */}
       <TextField
         id='standard-basic'
         label='Last Name'
@@ -51,6 +60,8 @@ export function UserForm({
         onChange={(e) => updateFields({ lastName: e.target.value })}
         sx={{ mb: 2 }}
       />
+
+      {/* Age Input */}
       <TextField
         id='standard-basic'
         placeholder='Age'
@@ -66,6 +77,8 @@ export function UserForm({
         }}
         sx={{ mb: 2 }}
       />
+
+      {/* Nationality Input */}
       <TextField
         id='standard-basic'
         label='Nationality'
@@ -75,6 +88,7 @@ export function UserForm({
         onChange={(e) => updateFields({ nationality: e.target.value })}
       />
 
+      {/* Email Address Input */}
       <TextField
         id='standard-basic'
         label='Email Address'
@@ -84,6 +98,7 @@ export function UserForm({
         sx={{ mb: 2 }}
       />
 
+      {/* Phone Number Input */}
       <TextField
         id='standard-basic'
         label='Phone Number'

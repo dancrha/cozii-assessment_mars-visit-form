@@ -6,6 +6,7 @@ import {
   TextField,
 } from "@mui/material";
 
+// Define the structure of health data
 type HealthData = {
   healthy: boolean;
   contactname: string;
@@ -13,10 +14,12 @@ type HealthData = {
   medical: string;
 };
 
+// Extend HealthData with a function to update partial data
 type HealthFormProps = HealthData & {
   updateFields: (fields: Partial<HealthData>) => void;
 };
 
+// HealthForm component to capture health and safety information
 export function HealthForm({
   healthy,
   contactname,
@@ -26,9 +29,12 @@ export function HealthForm({
 }: HealthFormProps) {
   return (
     <div className='flex flex-col p-8'>
+      {/* Section header */}
       <h1 className='flex justify-center text-2xl mb-4 text-black font-semibold'>
         Health & Safety
       </h1>
+
+      {/* Question about current health */}
       <FormLabel id='demo-radio-buttons-group-label'>
         Are you currently in good health and physically fit for space travel?
       </FormLabel>
@@ -48,11 +54,11 @@ export function HealthForm({
         />
       </RadioGroup>
 
+      {/* Medical Conditions Input */}
       <FormLabel className='mb-2'>
         Do you have any existing medical conditions or allergies that we should
         be aware of?
       </FormLabel>
-
       <TextField
         id='standard-basic'
         label='Medical Conditions'
@@ -63,6 +69,7 @@ export function HealthForm({
         onChange={(e) => updateFields({ medical: e.target.value })}
       />
 
+      {/* Emergency Contact Name Input */}
       <FormLabel className='mb-2'>Emergency Contact Name</FormLabel>
       <TextField
         id='standard-basic'
@@ -71,6 +78,8 @@ export function HealthForm({
         onChange={(e) => updateFields({ contactname: e.target.value })}
         sx={{ mb: 2 }}
       />
+
+      {/* Emergency Contact Phone Number Input */}
       <FormLabel className='mb-2'>Emergency Contact Phone Number</FormLabel>
       <TextField
         id='standard-basic'
