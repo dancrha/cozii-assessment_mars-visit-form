@@ -17,6 +17,8 @@
 
 ## Cozii Technologies Assessment
 
+Live Demo: https://cozii-assessment-mars-visit-form.vercel.app/
+
 ### Frameworks and Technologies Used
 
 - React.js
