@@ -1,4 +1,4 @@
-import { TextField } from "@mui/material";
+import { FormLabel, TextField } from "@mui/material";
 
 type UserData = {
   firstName: string;
@@ -24,9 +24,17 @@ export function UserForm({
 }: UserFormProps) {
   return (
     <div className='flex flex-col p-8 items-center'>
-      <h1 className='flex justify-center text-black font-semibold'>
+      <h1 className='flex justify-center mb-4 text-black text-2xl font-semibold'>
         Personal Information
       </h1>
+      <div className='flex text-center justify-center text-gray-600'>
+        <p>
+          Welcome to the Mars Expedition Application Form! Your health and
+          safety are of utmost importance to us. Please complete the following
+          sections with accurate and detailed information.
+        </p>
+      </div>
+
       <TextField
         id='standard-basic'
         label='First Name'
@@ -45,7 +53,7 @@ export function UserForm({
       />
       <TextField
         id='standard-basic'
-        placeholder=' '
+        placeholder='Age'
         label='Age'
         variant='outlined'
         value={isNaN(age) ? "" : age.toString()} // Check if age is NaN

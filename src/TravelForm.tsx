@@ -1,4 +1,4 @@
-import { MenuItem, Select, TextField } from "@mui/material";
+import { FormLabel, MenuItem, Select, TextField } from "@mui/material";
 import { DateField, DatePicker } from "@mui/x-date-pickers";
 import dayjs from "dayjs";
 import { useEffect, useState } from "react";
@@ -33,17 +33,11 @@ export function TravelForm({
 
   return (
     <div className='flex flex-col p-8'>
-      <h1 className='flex justify-center text-black font-semibold'>
+      <h1 className='flex justify-center text-2xl mb-4 text-black font-semibold'>
         Travel Preferences
       </h1>
-      <label className='mb-4'>Departure Date</label>
-      {/* <DatePicker
-        sx={{ mb: 2 }}
-        value={departure}
-        onChange={(date) =>
-          updateFields({ departure: date ? date.toString() : "" })
-        }
-      /> */}
+      <FormLabel className='mb-4'>Departure Date</FormLabel>
+
       <div className='flex gap-2'>
         <TextField
           id='standard-basic'
@@ -73,7 +67,7 @@ export function TravelForm({
           onChange={(e) => updateFields({ departureyear: e.target.value })}
         />
       </div>
-      <label className='mb-4'>Return Date</label>
+      <FormLabel className='mb-4'>Return Date</FormLabel>
       <div className='flex gap-2'>
         <TextField
           id='standard-basic'
@@ -104,11 +98,11 @@ export function TravelForm({
         />
       </div>
 
-      <label className='mb-2'>Accommodation Preference</label>
+      <FormLabel className='mb-2'>Accommodation Preference</FormLabel>
       <Select
         labelId='demo-simple-select-label'
         id='demo-simple-select'
-        sx={{ mb: 4 }}
+        sx={{ mb: 2 }}
         value={accommodation}
         onChange={(e) =>
           updateFields({ accommodation: e.target.value as string })
@@ -118,7 +112,7 @@ export function TravelForm({
         <MenuItem value='Martian Base'>Martian Base</MenuItem>
         <MenuItem value='Anti-Gravity Motel'>Anti-Gravity Motel</MenuItem>
       </Select>
-      <label className='mb-2'>Special Requests or Preferences</label>
+      <FormLabel className='mb-2'>Special Requests or Preferences</FormLabel>
       <TextField
         id='standard-basic'
         variant='outlined'

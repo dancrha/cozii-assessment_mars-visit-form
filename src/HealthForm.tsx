@@ -10,6 +10,7 @@ type HealthData = {
   healthy: boolean;
   contactname: string;
   contactnumber: number;
+  medical: string;
 };
 
 type HealthFormProps = HealthData & {
@@ -21,14 +22,15 @@ export function HealthForm({
   contactname,
   contactnumber,
   updateFields,
+  medical,
 }: HealthFormProps) {
   return (
     <div className='flex flex-col p-8'>
-      <h1 className='flex justify-center text-black font-semibold'>
+      <h1 className='flex justify-center text-2xl mb-4 text-black font-semibold'>
         Health & Safety
       </h1>
       <FormLabel id='demo-radio-buttons-group-label'>
-        Are you healthy?
+        Are you currently in good health and physically fit for space travel?
       </FormLabel>
       <RadioGroup
         aria-labelledby='demo-radio-buttons-group-label'
@@ -45,7 +47,23 @@ export function HealthForm({
           sx={{ mb: 2 }}
         />
       </RadioGroup>
-      <label className='mb-2'>Emergency Contact Name</label>
+
+      <FormLabel className='mb-2'>
+        Do you have any existing medical conditions or allergies that we should
+        be aware of?
+      </FormLabel>
+
+      <TextField
+        id='standard-basic'
+        label='Medical Conditions'
+        variant='outlined'
+        size='medium'
+        value={medical}
+        sx={{ mb: 2 }}
+        onChange={(e) => updateFields({ medical: e.target.value })}
+      />
+
+      <FormLabel className='mb-2'>Emergency Contact Name</FormLabel>
       <TextField
         id='standard-basic'
         variant='outlined'
@@ -53,7 +71,7 @@ export function HealthForm({
         onChange={(e) => updateFields({ contactname: e.target.value })}
         sx={{ mb: 2 }}
       />
-      <label className='mb-2'>Emergency Contact Phone Number</label>
+      <FormLabel className='mb-2'>Emergency Contact Phone Number</FormLabel>
       <TextField
         id='standard-basic'
         variant='outlined'
