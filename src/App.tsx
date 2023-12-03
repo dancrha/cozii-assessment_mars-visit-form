@@ -6,8 +6,7 @@ import { UserForm } from "./UserForm";
 import { useMultistepForm } from "./useMultistepForm";
 import { FormEvent, useState } from "react";
 import Confetti from "react-confetti";
-import React, { useRef } from "react";
-import { toast, Toaster } from "react-hot-toast";
+import { useRef } from "react";
 
 // Define the structure of the form data
 type FormData = {
@@ -62,8 +61,6 @@ function App() {
   const [data, setData] = useState(INITIAL_DATA);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const notify = () => toast.error("Here is my toast!");
-
   // Ref to scroll to the form section
   const divRef = useRef<HTMLDivElement | null>(null);
 
@@ -97,20 +94,24 @@ function App() {
   function onSubmit(e: FormEvent) {
     e.preventDefault();
 
+    // Function to validate the phone number
+    const isValidPhoneNumber = (phoneNumber: number) => {
+      const phoneNumberString = phoneNumber.toString();
+      return phoneNumberString.length >= 10 && /^\d+$/.test(phoneNumberString);
+    };
+
     // Check if required fields are completed based on the current step
     if (
       (currentStepIndex === 0 &&
         (data.firstName.trim() === "" || data.lastName.trim() === "")) ||
-      (currentStepIndex === 1 &&
-        (data.phone === 0 || data.email.trim() === "")) ||
+      (currentStepIndex === 0 &&
+        (!isValidPhoneNumber(data.phone) || data.email.trim() === "")) ||
       (currentStepIndex === 2 &&
-        (data.contactname.trim() === "" || data.contactnumber === 0))
+        (data.contactname.trim() === "" ||
+          !isValidPhoneNumber(data.contactnumber)))
     ) {
       // Display an alert for the user to fill in required fields
-      <Toaster position='top-center' />;
-      notify();
-      toast.error("Please fill in the required fields");
-      // alert("Please fill in all required fields.");
+      alert("Please fill in all required fields.");
       return;
     }
 
@@ -158,14 +159,19 @@ function App() {
             Celestial Escapes
           </span>
         </h1>{" "}
-        <img src='/assets/mars3.gif' alt='mars' width={800} className='mt-16' />
+        <img
+          src='/assets/mars3.gif'
+          alt='mars'
+          width={800}
+          className='mt-16 hover:scale-105 transition active:scale-90 duration-150'
+        />
       </div>
 
       {/* Get Started button */}
       <div className='flex justify-center text-center'>
         <button
           onClick={() => divRef.current?.scrollIntoView({ behavior: "smooth" })}
-          className='bg-gradient-to-r from-[#ffa103] to-[#f0030f] inline-block text-white p-4 mt-16 rounded-full hover:shadow-md text-md hover:scale-105 active:scale-90 transition duration-150 uppercase'
+          className='bg-gradient-to-r from-[#ffa103] to-[#f0030f] inline-block text-white p-4 mt-16 rounded-full hover:shadow-md text-md hover:scale-105 active:scale-20 transition duration-150 uppercase'
         >
           Get Started
         </button>
@@ -185,7 +191,7 @@ function App() {
             <img
               src='/assets/logo.png'
               alt='logo'
-              width={170}
+              width={200}
               height={60}
               className='mx-auto mb-4'
             />
@@ -219,7 +225,6 @@ function App() {
                 </button>
               )}
               <button
-                onClick={notify}
                 disabled={!areRequiredFieldsCompleted() && isLastStep}
                 type='submit'
                 className='border p-4 rounded-md bg-gradient-to-r from-orange-500 to-yellow-500 hover:scale-105 transition active:scale-90 duration-150 hover:shadow-xl'

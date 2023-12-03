@@ -29,6 +29,13 @@ export function HealthForm({
 }: HealthFormProps) {
   return (
     <div className='flex flex-col p-8'>
+      <img
+        src='/assets/logo.png'
+        alt='logo'
+        width={200}
+        height={60}
+        className='mx-auto mb-4'
+      />
       {/* Section header */}
       <h1 className='flex justify-center text-2xl mb-4 text-black font-semibold'>
         Health & Safety

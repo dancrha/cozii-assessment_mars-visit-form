@@ -27,6 +27,13 @@ export function UserForm({
 }: UserFormProps) {
   return (
     <div className='flex flex-col p-8 items-center'>
+      <img
+        src='/assets/logo.png'
+        alt='logo'
+        width={200}
+        height={60}
+        className='mx-auto mb-4'
+      />
       {/* Section header */}
       <h1 className='flex justify-center mb-4 text-black text-2xl font-semibold'>
         Personal Information
@@ -44,7 +51,7 @@ export function UserForm({
       {/* First Name Input */}
       <TextField
         id='standard-basic'
-        label='First Name'
+        label='First Name*'
         variant='outlined'
         value={firstName}
         onChange={(e) => updateFields({ firstName: e.target.value })}
@@ -54,7 +61,7 @@ export function UserForm({
       {/* Last Name Input */}
       <TextField
         id='standard-basic'
-        label='Last Name'
+        label='Last Name*'
         variant='outlined'
         value={lastName}
         onChange={(e) => updateFields({ lastName: e.target.value })}
@@ -91,7 +98,7 @@ export function UserForm({
       {/* Email Address Input */}
       <TextField
         id='standard-basic'
-        label='Email Address'
+        label='Email Address*'
         variant='outlined'
         value={email}
         onChange={(e) => updateFields({ email: e.target.value })}
@@ -101,7 +108,7 @@ export function UserForm({
       {/* Phone Number Input */}
       <TextField
         id='standard-basic'
-        label='Phone Number'
+        label='Phone Number*'
         variant='outlined'
         value={isNaN(phone) ? "" : phone.toString()} // Check if age is NaN
         onChange={(e) => {
