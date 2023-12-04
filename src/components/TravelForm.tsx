@@ -48,7 +48,9 @@ export function TravelForm({
       </h1>
 
       {/* Departure Date Section */}
-      <FormLabel className='mb-4'>Departure Date</FormLabel>
+      <FormLabel className='mb-4'>
+        Departure Date<span className='text-red-500'>*</span>
+      </FormLabel>
       <div className='flex gap-2'>
         {/* Day Input */}
         <TextField
@@ -83,7 +85,9 @@ export function TravelForm({
       </div>
 
       {/* Return Date Section */}
-      <FormLabel className='mb-4'>Return Date</FormLabel>
+      <FormLabel className='mb-4'>
+        Return Date<span className='text-red-500'>*</span>
+      </FormLabel>
       <div className='flex gap-2'>
         {/* Day Input */}
         <TextField

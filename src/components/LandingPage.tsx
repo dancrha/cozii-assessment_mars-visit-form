@@ -4,7 +4,7 @@ import { HealthForm } from "./HealthForm";
 import { TravelForm } from "./TravelForm";
 import { UserForm } from "./UserForm";
 import { useMultistepForm } from "./useMultistepForm";
-import { FormEvent, useState } from "react";
+import React, { FormEvent, useState } from "react";
 import Confetti from "react-confetti";
 import { useRef } from "react";
 
@@ -14,7 +14,7 @@ type FormData = {
   firstName: string;
   middleName: string;
   lastName: string;
-  age: number;
+  age: string;
   gender: string;
   country: string;
   certs: string;
@@ -30,10 +30,10 @@ type FormData = {
   specialreq: string;
   // Health information
   email: string;
-  phone: number;
+  phone: string;
   healthy: boolean;
   contactname: string;
-  contactnumber: number;
+  contactnumber: string;
   medical: string;
 };
 
@@ -42,7 +42,7 @@ const INITIAL_DATA: FormData = {
   firstName: "",
   middleName: "",
   lastName: "",
-  age: 0,
+  age: "",
   gender: "",
   country: "",
   certs: "",
@@ -56,16 +56,17 @@ const INITIAL_DATA: FormData = {
   launchsite: "",
   specialreq: "",
   email: "",
-  phone: 0,
+  phone: "",
   healthy: false,
   contactname: "",
-  contactnumber: 0,
+  contactnumber: "",
   medical: "",
 };
 
 const LandingPage = () => {
   const [data, setData] = useState(INITIAL_DATA);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isExploding, setIsExploding] = React.useState(false);
 
   // Ref to scroll to the form section
   const divRef = useRef<HTMLDivElement | null>(null);
@@ -81,35 +82,57 @@ const LandingPage = () => {
     return (
       data.firstName.trim() !== "" &&
       data.lastName.trim() !== "" &&
-      data.phone !== 0 &&
+      data.phone !== "" &&
       data.email.trim() !== "" &&
       data.contactname.trim() !== "" &&
-      data.contactnumber !== 0
+      data.contactnumber.trim() !== "" &&
+      data.departureday.trim() !== "" &&
+      data.departuremonth.trim() !== "" &&
+      data.departureyear.trim() !== "" &&
+      data.returnday.trim() !== "" &&
+      data.returnmonth.trim() !== "" &&
+      data.returnyear.trim() !== ""
     );
   };
 
   // Custom hook for handling multistep form logic
-  const { steps, currentStepIndex, step, isFirstStep, back, next, isLastStep } =
-    useMultistepForm([
-      <UserForm {...data} updateFields={updateFields} />,
-      <TravelForm {...data} updateFields={updateFields} />,
-      <HealthForm {...data} updateFields={updateFields} />,
-    ]);
+  const {
+    steps,
+    currentStepIndex,
+    step,
+    isFirstStep,
+    back,
+    next,
+    isLastStep,
+    setCurrentStepIndex,
+  } = useMultistepForm([
+    <UserForm {...data} updateFields={updateFields} />,
+    <TravelForm {...data} updateFields={updateFields} />,
+    <HealthForm {...data} updateFields={updateFields} />,
+  ]);
 
   // Form submission handler
   function onSubmit(e: FormEvent) {
     e.preventDefault();
 
     // Function to validate the phone number
-    const isValidPhoneNumber = (phoneNumber: number) => {
-      const phoneNumberString = phoneNumber.toString();
-      return phoneNumberString.length >= 10 && /^\d+$/.test(phoneNumberString);
+    const isValidPhoneNumber = (phoneNumber: string) => {
+      const cleanedPhoneNumber = phoneNumber.replace(/[-()\s]/g, ""); // Remove hyphens and other non-digit characters
+      return (
+        cleanedPhoneNumber.length >= 10 && /^\d+$/.test(cleanedPhoneNumber)
+      );
     };
 
     // Check if required fields are completed based on the current step
     if (
       (currentStepIndex === 0 &&
         (data.firstName.trim() === "" || data.lastName.trim() === "")) ||
+      (currentStepIndex === 1 && data.departureday.trim() === "") ||
+      (currentStepIndex === 1 && data.departuremonth.trim() === "") ||
+      (currentStepIndex === 1 && data.departureyear.trim() === "") ||
+      (currentStepIndex === 1 && data.returnday.trim() === "") ||
+      (currentStepIndex === 1 && data.returnmonth.trim() === "") ||
+      (currentStepIndex === 1 && data.returnyear.trim() === "") ||
       (currentStepIndex === 0 &&
         (!isValidPhoneNumber(data.phone) || data.email.trim() === "")) ||
       (currentStepIndex === 2 &&
@@ -132,6 +155,10 @@ const LandingPage = () => {
   const resetForm = () => {
     setData(INITIAL_DATA);
     setIsSubmitted(false);
+    setCurrentStepIndex(0);
+
+    // Scroll to the top of the screen
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   // JSX for the App component
@@ -180,14 +207,14 @@ const LandingPage = () => {
       <div className='flex justify-center text-center'>
         <button
           onClick={() => divRef.current?.scrollIntoView({ behavior: "smooth" })}
-          className='bg-gradient-to-r from-[#ffa103] to-[#f0030f] hover:from-[#f0030f] hover:to-[#ffa103] inline-block text-white py-3 px-8 mt-16 rounded-full hover:shadow-xl text-md font-mono hover:scale-105 active:scale-90 transition duration-150 uppercase'
+          className='bg-gradient-to-r from-[#ffa103] to-[#f0030f] hover:from-[#f0030f] hover:to-[#ffa103] inline-block text-white py-3 px-8 mt-16 rounded-full hover:shadow-xl text-md font-mono hover:scale-105 active:scale-90 transition duration-150 uppercase mb-72'
         >
           Get Started
         </button>
       </div>
 
       {/* Confetti animation on successful submission */}
-      {isSubmitted ? <Confetti width={1900} height={1445} /> : null}
+      {isSubmitted ? <Confetti width={1900} height={1800} /> : null}
 
       {/* Form section */}
       <div
@@ -228,7 +255,7 @@ const LandingPage = () => {
                 <button
                   type='button'
                   onClick={back}
-                  className='border px-6 py-2 rounded-md bg-gradient-to-r from-red-600 to-red-900 text-white hover:scale-105 transition active:scale-90 duration-150 hover:shadow-xl'
+                  className='border px-6 py-2 rounded-md bg-gradient-to-r from-red-900 to-red-600 text-white hover:scale-105 transition active:scale-90 duration-150 hover:shadow-xl'
                 >
                   Back
                 </button>
@@ -244,6 +271,19 @@ const LandingPage = () => {
           </form>
         )}
       </div>
+
+      <footer className='w-full bg-black items-center justify-between flex'>
+        <img
+          src='/assets/logo2.png'
+          alt='logo'
+          width={170}
+          height={60}
+          onClick={resetForm}
+          className='hover:cursor-pointer ml-8'
+        />
+
+        <p className='text-white mr-8'>&copy; 2023 Celestial Escapes</p>
+      </footer>
     </div>
   );
 };

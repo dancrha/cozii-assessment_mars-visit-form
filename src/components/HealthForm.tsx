@@ -10,7 +10,7 @@ import {
 type HealthData = {
   healthy: boolean;
   contactname: string;
-  contactnumber: number;
+  contactnumber: string;
   medical: string;
 };
 
@@ -47,7 +47,6 @@ export function HealthForm({
       </FormLabel>
       <RadioGroup
         aria-labelledby='demo-radio-buttons-group-label'
-        defaultValue='female'
         name='radio-buttons-group'
         value={healthy ? "yes" : "no"}
         onChange={(e) => updateFields({ healthy: e.target.value === "yes" })}
@@ -71,33 +70,40 @@ export function HealthForm({
         variant='outlined'
         size='medium'
         value={medical}
+        placeholder='E.g. Epilepsy'
         sx={{ mb: 2 }}
         onChange={(e) => updateFields({ medical: e.target.value })}
       />
 
       {/* Emergency Contact Name Input */}
-      <FormLabel className='mb-2'>Emergency Contact Name</FormLabel>
+      <FormLabel className='mb-2'>
+        Emergency Contact Name<span className='text-red-500'>*</span>
+      </FormLabel>
       <TextField
         id='standard-basic'
         variant='outlined'
+        placeholder='John Smith'
         value={contactname}
         onChange={(e) => updateFields({ contactname: e.target.value })}
         sx={{ mb: 2 }}
       />
 
       {/* Emergency Contact Phone Number Input */}
-      <FormLabel className='mb-2'>Emergency Contact Phone Number</FormLabel>
+      <FormLabel className='mb-2'>
+        Emergency Contact Phone Number<span className='text-red-500'>*</span>
+      </FormLabel>
       <TextField
         id='standard-basic'
         variant='outlined'
+        placeholder='XXX-XXX-XXXX'
         sx={{ mb: 2 }}
-        value={isNaN(contactnumber) ? "" : contactnumber.toString()} // Check if age is NaN
+        value={contactnumber} // Check if age is NaN
         onChange={(e) => {
           const inputValue = e.target.value;
           const newValue = parseInt(inputValue, 10);
 
           // Check if newValue is a valid number before updating the state
-          updateFields({ contactnumber: isNaN(newValue) ? 0 : newValue });
+          updateFields({ contactnumber: e.target.value as string });
         }}
       />
     </div>
