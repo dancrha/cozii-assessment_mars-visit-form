@@ -9,6 +9,7 @@ type TravelData = {
   returnmonth: string;
   returnyear: string;
   accommodation: string;
+  launchsite: string;
   specialreq: string;
 };
 
@@ -26,6 +27,7 @@ export function TravelForm({
   returnmonth,
   returnyear,
   accommodation,
+  launchsite,
   specialreq,
   updateFields,
 }: TravelFormProps) {
@@ -41,7 +43,7 @@ export function TravelForm({
         className='mx-auto mb-4'
       />
       {/* Section header */}
-      <h1 className='flex justify-center text-2xl mb-4 text-black font-semibold'>
+      <h1 className='flex justify-center font-mono text-2xl mb-4 text-black font-semibold'>
         Travel Preferences
       </h1>
 
@@ -127,9 +129,69 @@ export function TravelForm({
         }
       >
         {/* Options for Accommodation */}
-        <MenuItem value='Space Hotel'>Space Hotel</MenuItem>
-        <MenuItem value='Martian Base'>Martian Base</MenuItem>
-        <MenuItem value='Anti-Gravity Motel'>Anti-Gravity Motel</MenuItem>
+        <MenuItem value='Habitat Pod'>Habitat Pod</MenuItem>
+        <MenuItem value='Red Planet Retreat'>Red Planet Retreat</MenuItem>
+        <MenuItem value='Cosmic Campsite'>Cosmic Campsite</MenuItem>
+        <MenuItem value='Stellar Suite'>Stellar Suite</MenuItem>
+        <MenuItem value='Galactic Guesthouse'>Galactic Guesthouse</MenuItem>
+        <MenuItem value='Astro Lodge'>Astro Lodge</MenuItem>
+        <MenuItem value='Celestial Cabin'>Celestial Cabin</MenuItem>
+        <MenuItem value='Space Bunker'>Space Bunker</MenuItem>
+        <MenuItem value='Zero-G Residence'>Zero-G Residence</MenuItem>
+        <MenuItem value='Orbit Oasis'>Orbit Oasis</MenuItem>
+        <MenuItem value='Infinity Inn'>Infinity Inn</MenuItem>
+        <MenuItem value='Interplanetary Inn'>Interplanetary Inn</MenuItem>
+        <MenuItem value='Nebula Nest'>Nebula Nest</MenuItem>
+        <MenuItem value='Starship Suite'>Starship Suite</MenuItem>
+        <MenuItem value='Solar System Sanctuary'>
+          Solar System Sanctuary
+        </MenuItem>
+      </Select>
+
+      <FormLabel className='mb-2'>Launch Site Preference</FormLabel>
+      <Select
+        labelId='demo-simple-select-label'
+        id='demo-simple-select'
+        sx={{ mb: 2 }}
+        value={launchsite}
+        onChange={(e) => updateFields({ launchsite: e.target.value as string })}
+      >
+        <MenuItem value='KennedySpaceCenter'>
+          Kennedy Space Center, USA
+        </MenuItem>
+        <MenuItem value='BaikonurCosmodrome'>
+          Baikonur Cosmodrome, Kazakhstan
+        </MenuItem>
+        <MenuItem value='GuianaSpaceCentre'>
+          Guiana Space Centre, French Guiana
+        </MenuItem>
+        <MenuItem value='VostochnyCosmodrome'>
+          Vostochny Cosmodrome, Russia
+        </MenuItem>
+        <MenuItem value='WenchangSpacecraftLaunchSite'>
+          Wenchang Spacecraft Launch Site, China
+        </MenuItem>
+        <MenuItem value='SatishDhawanSpaceCentre'>
+          Satish Dhawan Space Centre, India
+        </MenuItem>
+        <MenuItem value='TanegashimaSpaceCenter'>
+          Tanegashima Space Center, Japan
+        </MenuItem>
+        <MenuItem value='AlcântaraSpaceCenter'>
+          Alcântara Space Center, Brazil
+        </MenuItem>
+        <MenuItem value='SpaceXSpaceport'>
+          SpaceX Spaceport, Mars Orbit
+        </MenuItem>
+        <MenuItem value='BlueOriginLaunchSite'>
+          Blue Origin Launch Site, Mars Orbit
+        </MenuItem>
+        <MenuItem value='ESAExoSpaceport'>
+          ESA Exo Spaceport, Mars Orbit
+        </MenuItem>
+        <MenuItem value='MarsColonizationInitiative'>
+          Mars Colonization Initiative, Mars Surface
+        </MenuItem>
       </Select>
 
       {/* Special Requests or Preferences Section */}

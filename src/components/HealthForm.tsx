@@ -37,7 +37,7 @@ export function HealthForm({
         className='mx-auto mb-4'
       />
       {/* Section header */}
-      <h1 className='flex justify-center text-2xl mb-4 text-black font-semibold'>
+      <h1 className='flex justify-center text-2xl font-mono mb-4 text-black font-semibold'>
         Health & Safety
       </h1>
 
@@ -68,7 +68,6 @@ export function HealthForm({
       </FormLabel>
       <TextField
         id='standard-basic'
-        label='Medical Conditions'
         variant='outlined'
         size='medium'
         value={medical}
