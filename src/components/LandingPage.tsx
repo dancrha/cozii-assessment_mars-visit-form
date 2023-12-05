@@ -66,7 +66,6 @@ const INITIAL_DATA: FormData = {
 const LandingPage = () => {
   const [data, setData] = useState(INITIAL_DATA);
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const [isExploding, setIsExploding] = React.useState(false);
 
   // Ref to scroll to the form section
   const divRef = useRef<HTMLDivElement | null>(null);
@@ -250,7 +249,7 @@ const LandingPage = () => {
             </div>
             {step}
             {/* Navigation buttons */}
-            <div className='mt-2 flex gap-2 justify-end mt-auto'>
+            <div className='flex gap-2 justify-end mt-auto'>
               {!isFirstStep && (
                 <button
                   type='button'
