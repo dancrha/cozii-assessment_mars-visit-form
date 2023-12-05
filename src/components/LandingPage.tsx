@@ -188,7 +188,7 @@ const LandingPage = () => {
         <h1 className='text-white text-3xl font-mono mb-8 '>
           Greetings, intergalactic travelers!
         </h1>
-        <h1 className='text-white text-5xl  font-mono  '>
+        <h1 className='text-white lg:text-4xl xl:text-5xl font-mono   '>
           Embark on a Journey to Mars with{" "}
           <span className='bg-gradient-to-r from-[#ffa103] to-[#f0030f] inline-block text-transparent bg-clip-text '>
             Celestial Escapes
